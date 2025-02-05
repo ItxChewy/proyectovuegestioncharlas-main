@@ -1,9 +1,6 @@
 <template>
   <div class="container">
-    <i
-      class="arrow-icon fa fa-arrow-left ml-3 mt-3"
-      @click="navigateToStudentList"
-    ></i>
+    <i class="arrow-icon fa fa-arrow-left ml-3 mt-3" @click="navigateToStudentList"></i>
     <h1 class="text-center text-3xl font-weight-bold">
       Ronda <span class="font-weight-bold">{{ idRonda }}</span>
     </h1>
@@ -24,39 +21,22 @@
               >
             </div> -->
           </div>
-          <div
-            class="scrollable-content"
-            @dragover.prevent
-            @drop="onDrop($event, 'propuestas')"
-          >
-            <div
-              v-for="charla in charlasPropuestas"
-              :key="charla.idCharla"
-              class="draggable-item d-flex align-items-center p-4 bg-light shadow-sm rounded mb-3"
-              draggable="true"
-              @dragstart="onDragStart($event, charla)"
-            >
-              <img
-                :src="charla.imagenCharla"
-                alt="Imagen Charla"
-                class="w-16 h-16 object-cover rounded-circle mr-3"
-                @error="onImageError($event)"
-              />
+          <div class="scrollable-content" @dragover.prevent @drop="onDrop($event, 'propuestas')">
+            <div v-for="charla in charlasPropuestas" :key="charla.idCharla"
+              class="draggable-item d-flex align-items-center p-4 bg-light shadow-sm rounded mb-3" draggable="true"
+              @dragstart="onDragStart($event, charla)">
+              <img :src="charla.imagenCharla" alt="Imagen Charla" class="w-16 h-16 object-cover rounded-circle mr-3"
+                @error="onImageError($event)" />
               <div class="w-100">
                 <h3 class="h6 font-weight-bold">{{ charla.titulo }}</h3>
                 <div class="d-flex align-items-center">
-                  <span
-                    :class="{
-                      'bg-secondary text-white': charla.idEstadoCharla === 1,
-                      'bg-success text-white': charla.idEstadoCharla === 2,
-                    }"
-                    class="px-2 py-1 text-xs rounded-pill"
-                  >
+                  <span :class="{
+                    'bg-secondary text-white': charla.idEstadoCharla === 1,
+                    'bg-success text-white': charla.idEstadoCharla === 2,
+                  }" class="px-2 py-1 text-xs rounded-pill">
                     {{ charla.idEstadoCharla === 1 ? "Propuesta" : "Aceptada" }}
                   </span>
-                  <span
-                    class="px-2 py-1 text-xs bg-info text-white rounded-pill ml-2"
-                  >
+                  <span class="px-2 py-1 text-xs bg-info text-white rounded-pill ml-2">
                     Votos: {{ charla.votos }}
                   </span>
                 </div>
@@ -70,52 +50,31 @@
       <div class="col-md-6">
         <div class="card p-4 shadow-sm border">
           <h2 class="h5 mb-4">Charlas Aceptadas</h2>
-          <div
-            class="scrollable-content"
-            @dragover.prevent
-            @drop="onDrop($event, 'aceptadas')"
-          >
+          <div class="scrollable-content" @dragover.prevent @drop="onDrop($event, 'aceptadas')">
             <div
               class="draggable-item text-center p-5 bg-light shadow-sm rounded mb-4 border-dashed border-2 border-info"
-              @click="acceptCharla"
-            >
+              @click="acceptCharla">
               <i class="fas fa-plus text-muted" style="font-size: 2rem"></i>
               <p class="text-muted">Arrastra aquí una charla para aceptarla</p>
             </div>
-            <div
-              v-for="charla in charlasAceptadas"
-              :key="charla.idCharla"
+            <div v-for="charla in charlasAceptadas" :key="charla.idCharla"
               class="relative draggable-item d-flex align-items-center p-4 bg-light shadow-sm rounded mb-3"
-              draggable="true"
-              @dragstart="onDragStart($event, charla)"
-            >
-              <div
-                v-if="charla.idEstadoCharla === 2"
-                class="position-absolute top-0 right-0 mt-2 mr-2 text-warning"
-              >
-               
+              draggable="true" @dragstart="onDragStart($event, charla)">
+              <div v-if="charla.idEstadoCharla === 2" class="position-absolute top-0 right-0 mt-2 mr-2 text-warning">
+
               </div>
-              <img
-                :src="charla.imagenCharla"
-                alt="Imagen Charla"
-                class="w-16 h-16 object-cover rounded-circle mr-3"
-                @error="onImageError($event)"
-              />
+              <img :src="charla.imagenCharla" alt="Imagen Charla" class="w-16 h-16 object-cover rounded-circle mr-3"
+                @error="onImageError($event)" />
               <div class="w-100">
                 <h3 class="h6 font-weight-bold">{{ charla.titulo }}</h3>
                 <div class="d-flex align-items-center">
-                  <span
-                    :class="{
-                      'bg-secondary text-white': charla.idEstadoCharla === 1,
-                      'bg-success text-white': charla.idEstadoCharla === 2,
-                    }"
-                    class="px-2 py-1 text-xs rounded-pill"
-                  >
+                  <span :class="{
+                    'bg-secondary text-white': charla.idEstadoCharla === 1,
+                    'bg-success text-white': charla.idEstadoCharla === 2,
+                  }" class="px-2 py-1 text-xs rounded-pill">
                     {{ charla.idEstadoCharla === 1 ? "Propuesta" : "Aceptada" }}
                   </span>
-                  <span
-                    class="px-2 py-1 text-xs bg-info text-white rounded-pill ml-2"
-                  >
+                  <span class="px-2 py-1 text-xs bg-info text-white rounded-pill ml-2">
                     Votos: {{ charla.votos }}
                   </span>
                 </div>
@@ -137,10 +96,8 @@
     </div>
 
     <!-- Popup de confirmación -->
-    <div
-      v-if="mostrarPopup"
-      class="fixed inset-0 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center z-50"
-    >
+    <div v-if="mostrarPopup"
+      class="fixed inset-0 bg-dark bg-opacity-75 d-flex align-items-center justify-content-center z-50">
       <div class="bg-white p-5 rounded-lg shadow-lg max-w-sm w-100">
         <h3 class="h5 mb-4">{{ mensajePopup }}</h3>
         <div class="d-flex justify-content-between">
@@ -153,7 +110,7 @@
     </div>
   </div>
 </template>
- 
+
 <script>
 import CharlasService from '@/services/CharlasService';
 export default {
@@ -222,6 +179,7 @@ export default {
     confirmarAccion() {
       if (
         this.mensajePopup === "¿Está seguro de que desea guardar los cambios?"
+
       ) {
         this.guardarCambios();
       } else if (
@@ -235,22 +193,43 @@ export default {
       this.mostrarPopup = false;
     },
     guardarCambios() {
+      console.log("ADFSDFEFDGAFDGHEFGFDAHFDHGHFD");
       // Implementar lógica para guardar cambios en las charlas
+      const updatedCharlas = this.charlasAceptadas.map((charla) => ({
+        idCharla: charla.idCharla,
+        titulo: charla.titulo,
+        descripcion: charla.descripcion,
+        tiempo: charla.tiempo,
+        fechaPropuesta: charla.fechaPropuesta,
+        idUsuario: charla.idUsuario,
+        idEstadoCharla: charla.idEstadoCharla,
+        idRonda: charla.idRonda,
+        imagenCharla: charla.imagenCharla,
+      }));
+
+      //console.log(updatedCharlas);
+      updatedCharlas.forEach((charla) => {
+        console.log(charla)
+        this.charlasService.updateEstadoCharla(charla.idCharla, charla.idEstadoCharla).then(response => {
+          console.log(response);
+        });
+      });
     },
     cancelarCambios() {
-      this.$router.push("/courses");
+      window.location.reload();
+      
     },
-    estadocharlas(){
-        this.charlasTotal.forEach((charla, i) => {
-            console.log(i)
-            if(charla.estadoCharla == "ACEPTADA"){
-                this.charlasAceptadas.push(charla);
-                
-            }else{
-                this.charlasPropuestas.push(charla)
-                console.log(charla)
-            }
-        })
+    estadocharlas() {
+      this.charlasTotal.forEach((charla, i) => {
+        console.log(i)
+        if (charla.estadoCharla == "ACEPTADA") {
+          this.charlasAceptadas.push(charla);
+
+        } else {
+          this.charlasPropuestas.push(charla)
+          console.log(charla)
+        }
+      })
     }
   },
   mounted() {
@@ -258,18 +237,18 @@ export default {
     this.idCurso = this.$route.params.idCurso;
     // Aquí debes cargar las charlas y alumnos de la misma forma que en el componente Angular
     this.charlasService.getCharlasRonda(this.idRonda).then(r => {
-        this.charlasTotal = r
-        this.estadocharlas();
-        })
-    
+      this.charlasTotal = r
+      this.estadocharlas();
+    })
+
   },
 };
 </script>
- 
-<style scoped>
 
+<style scoped>
 .scrollable-content {
-  max-height: 400px; /* Ajusta según sea necesario */
+  max-height: 400px;
+  /* Ajusta según sea necesario */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -311,10 +290,12 @@ export default {
     transform: translateY(0) translateX(0);
     opacity: 1;
   }
+
   50% {
     transform: translateY(-100px) translateX(50px);
     opacity: 0.7;
   }
+
   100% {
     transform: translateY(-200px) translateX(-50px);
     opacity: 0;

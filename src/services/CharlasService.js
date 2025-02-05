@@ -148,6 +148,7 @@ export default class CharlasService {
     }
 
     updateEstadoCharla(idCharla, idEstadoCharla) {
+        console.log(idCharla, idEstadoCharla)
         return new Promise((resolve, reject) => {
             const endpoint = `api/Profesor/UpdateEstadoCharla/${idCharla}/${idEstadoCharla}`;
             const token = Cookies.get('bearer_token');
