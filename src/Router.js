@@ -13,7 +13,7 @@ import NotFoundComponent from "./components/NotFoundComponent.vue";
 import AlumnosCursoProfesorComponent from "@/components/AlumnosCursoProfesorComponent";
 import CharlasDetalleComponent from "@/components/CharlasDetalleComponent";
 import SeleccionRondasProfesor from "@/components/SeleccionRondasProfesor";
-
+import DranAndDropProfesor from "@/components/DranAndDropProfesor.vue";
 const routes = [
     {
         path: '/login',
@@ -156,6 +156,11 @@ const routes = [
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
         component: NotFoundComponent
+    },
+    {
+        path:'/dragandrop/:id',
+        name: 'Drag',
+        component: DranAndDropProfesor
     }
 ];
 
